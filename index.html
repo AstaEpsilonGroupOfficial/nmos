@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asta Epsilon Design Studio - Digital Solutions & Creative Excellence</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="venture_logo-removebg-preview.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <!-- Load Google Material Symbols (Rounded style) -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Rounded" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'violet-600': '#7c3aed', // Primary
+                        'cyan-400': '#22d3ee',  // Accent
+                        'gray-950': '#030712', // Background
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --primary-color: #7c3aed; /* Violet 600 */
+            --accent-color: #22d3ee; /* Cyan 400 */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #030712; /* Darker than black, almost charcoal */
+            color: #f9fafb; /* Light gray for text */
+            scroll-behavior: smooth;
+        }
+        .text-gradient {
+            background-image: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .card {
+            transition: all 0.3s ease;
+            transform: scale(1);
+        }
+        .card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 15px -3px rgba(124, 58, 237, 0.5), 0 4px 6px -2px rgba(124, 58, 237, 0.3);
+        }
+        .section-padding {
+            padding: 5rem 0;
+        }
+        @media (min-width: 768px) {
+            .section-padding {
+                padding: 8rem 0;
+            }
+        }
+        /* Style the Material Symbols icons */
+        .material-symbols-rounded {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 48;
+            font-size: 32px; /* Base size, will be overridden by text-4xl on parent div */
+        }
+        /* NEW: Custom class for the logo fade effect */
+        .logo-fade-mask {
+            /* Create a vertical gradient mask: transparent (hidden) at edges, black (visible) in center */
+            mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-gray-900/80 backdrop-blur-md shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="flex items-center justify-between h-20">
+                <!-- Logo Container (NOW WITH FADING EDGES) -->
+                <!-- The h-20 constrains the height, and the logo-fade-mask creates the soft fade -->
+                <div class="flex items-center h-20 overflow-hidden logo-fade-mask">
+                    <a href="#hero" class="flex items-center">
+                        <img src="design studio by asta epsilon (1).png" 
+                            alt="Venture Design Studio Logo" 
+                            class="w-56 h-56"
+                            onerror="this.onerror=null;this.src='https://placehold.co/224x224/7c3aed/ffffff?text=AE';">
+                    </a>
+                </div>
+                
+                <div class="hidden md:flex space-x-8 text-sm font-medium">
+                    <a href="#services" class="text-gray-300 hover:text-cyan-400 transition duration-150 py-2">Services</a>
+                    <a href="#suite" class="text-gray-300 hover:text-cyan-400 transition duration-150 py-2">Full Suites</a>
+                    <a href="#addons" class="text-gray-300 hover:text-cyan-400 transition duration-150 py-2">Add-ons & AMC</a>
+                    <a href="#contact" class="px-4 py-2 bg-violet-600 rounded-lg text-white hover:bg-violet-700 transition duration-150">Get a Quote</a>
+                </div>
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-cyan-400 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </nav>
+        </div>
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-800 absolute w-full shadow-xl">
+            <a href="#services" class="block px-4 py-3 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-cyan-400" onclick="toggleMobileMenu()">Services</a>
+            <a href="#suite" class="block px-4 py-3 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-cyan-400" onclick="toggleMobileMenu()">Full Suites</a>
+            <a href="#addons" class="block px-4 py-3 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-cyan-400" onclick="toggleMobileMenu()">Add-ons & AMC</a>
+            <a href="#contact" class="block px-4 py-3 text-sm font-medium text-white bg-violet-600 hover:bg-violet-700 text-center" onclick="toggleMobileMenu()">Get a Quote</a>
+        </div>
+    </header>
+
+    <!-- Hero Section (Updated for Video Background) -->
+    <section id="hero" class="section-padding pt-32 pb-24 text-center relative overflow-hidden">
+        <!-- Background Video and Overlay -->
+        <div class="absolute inset-0 z-0">
+            <video autoplay loop muted playsinline class="w-full h-full object-cover opacity-20">
+                <!-- 
+                    *** IMPORTANT: Video Placeholder Warning *** Please replace the 'placeholder-video-bg.mp4' source below with the actual URL 
+                    of your high-resolution, 15-second looping video. 
+                    Ensure the video is hosted on a reliable server.
+                -->
+                <source src="hero-bg.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <!-- Dark Overlay for Text Readability -->
+            <div class="absolute inset-0"></div>
+        </div>
+        
+        <!-- Text Content Container (z-index 10 to ensure it sits above the video and overlay) -->
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <h1 class="text-5xl sm:text-7xl lg:text-8xl font-extrabold tracking-tight mb-6">
+                <span class="block">Building <span class="text-gradient">Digital</span> Futures.</span>
+                <span class="block text-gray-400 mt-4 text-3xl sm:text-5xl">Engineered for Excellence.</span>
+            </h1>
+            <p class="mt-6 text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto">
+                Venture design studio delivers end-to-end solutions, from bespoke web and app development to comprehensive software suites and long-term maintenance.
+            </p>
+            <div class="mt-10 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="#services" class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-xl shadow-lg text-white bg-violet-600 hover:bg-violet-700 focus:outline-none focus:ring-4 focus:ring-violet-500 focus:ring-opacity-50 transition duration-300">
+                    Explore Services
+                </a>
+                <a href="#contact" class="inline-flex items-center justify-center px-8 py-3 border border-gray-600 text-base font-medium rounded-xl shadow-lg text-gray-300 bg-transparent hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-700 focus:ring-opacity-50 transition duration-300">
+                    View Portfolio
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Services Section (UPDATED WITH GOOGLE MATERIAL ICONS) -->
+    <section id="services" class="section-padding pt-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl sm:text-5xl font-extrabold text-center mb-16 text-white">Our Core <span class="text-gradient">Expertise</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+                <!-- Service 1: Web Development -->
+                <div class="card p-6 bg-gray-800 rounded-2xl border border-gray-700 hover:border-violet-600">
+                    <div class="text-4xl text-cyan-400 mb-4">
+                        <!-- Replaced SVG with Material Symbol: code -->
+                        <span class="material-symbols-rounded">code</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-white">Web Development</h3>
+                    <p class="text-gray-400 text-sm">Crafting responsive, high-performance websites and powerful web applications using modern MERN, LAMP, or custom tech stacks.</p>
+                </div>
+
+                <!-- Service 2: App Development -->
+                <div class="card p-6 bg-gray-800 rounded-2xl border border-gray-700 hover:border-violet-600">
+                    <div class="text-4xl text-cyan-400 mb-4">
+                        <!-- Replaced SVG with Material Symbol: smartphone -->
+                        <span class="material-symbols-rounded">smartphone</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-white">App Development</h3>
+                    <p class="text-gray-400 text-sm">Native iOS/Android and cross-platform mobile solutions designed for user experience and scalability.</p>
+                </div>
+
+                <!-- Service 3: Software Development -->
+                <div class="card p-6 bg-gray-800 rounded-2xl border border-gray-700 hover:border-violet-600">
+                    <div class="text-4xl text-cyan-400 mb-4">
+                        <!-- Replaced SVG with Material Symbol: desktop_windows -->
+                        <span class="material-symbols-rounded">desktop_windows</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-white">Software Development</h3>
+                    <p class="text-gray-400 text-sm">Bespoke desktop applications, ERPs, CRMs, and custom business software tailored to your workflows.</p>
+                </div>
+
+                <!-- Service 4: IoT Software & API Integration -->
+                <div class="card p-6 bg-gray-800 rounded-2xl border border-gray-700 hover:border-violet-600">
+                    <div class="text-4xl text-cyan-400 mb-4">
+                        <!-- Replaced SVG with Material Symbol: router -->
+                        <span class="material-symbols-rounded">router</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-white">IoT Software & API Integration</h3>
+                    <p class="text-gray-400 text-sm">Developing software for IoT devices and seamless integration with third-party APIs (e.g., weather data) to create smart, data-driven systems.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Full Project Suites Section -->
+    <section id="suite" class="section-padding bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <p class="text-sm font-semibold uppercase text-violet-400 mb-2">End-to-End Solutions</p>
+                <h2 class="text-4xl sm:text-5xl font-extrabold text-white">The <span class="text-gradient">Full Project Suite</span></h2>
+                <!-- UPDATED Description for Full Project Suite -->
+                <p class="mt-4 text-lg text-gray-400 max-w-3xl mx-auto">
+                    Our <b>Full Project Suite</b> is the best value, combining a powerful <b>Brand Website</b>, a feature-rich <b>Mobile Application</b>, and dedicated <b>Admin Software</b> for management—all bundled for a lower price.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Step 1: Discovery & Planning -->
+                <div class="card p-8 bg-gray-800 rounded-2xl border border-gray-700">
+                    <div class="flex items-center mb-4">
+                        <div class="text-3xl font-bold text-cyan-400 mr-4">01</div>
+                        <h3 class="text-2xl font-bold text-white">Discovery & Planning</h3>
+                    </div>
+                    <p class="text-gray-400">Deep dive into requirements, market research, wireframing, and creating a detailed project roadmap.</p>
+                </div>
+
+                <!-- Step 2: Design & Development -->
+                <div class="card p-8 bg-gray-800 rounded-2xl border border-gray-700">
+                    <div class="flex items-center mb-4">
+                        <div class="text-3xl font-bold text-cyan-400 mr-4">02</div>
+                        <h3 class="text-2xl font-bold text-white">Design & Development</h3>
+                    </div>
+                    <p class="text-gray-400">Iterative development cycle, continuous testing, and pixel-perfect UI/UX design implementation.</p>
+                </div>
+
+                <!-- Step 3: Deployment & Handover -->
+                <div class="card p-8 bg-gray-800 rounded-2xl border border-gray-700">
+                    <div class="flex items-center mb-4">
+                        <div class="text-3xl font-bold text-cyan-400 mr-4">03</div>
+                        <h3 class="text-2xl font-bold text-white">Deployment & Handover</h3>
+                    </div>
+                    <p class="text-gray-400">Secure, high-availability deployment, comprehensive documentation, and personalized staff training.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add-on Services and AMC Section -->
+    <section id="addons" class="section-padding">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl sm:text-5xl font-extrabold text-white">Maintenance and <span class="text-gradient">Creative Add-ons</span></h2>
+                <p class="mt-4 text-lg text-gray-400 max-w-3xl mx-auto">
+                    Extend your brand presence and ensure long-term stability with our specialised services.
+                </p>
+            </div>
+
+            <!-- AMC Tiers (UPDATED) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                
+                <!-- Tier 1: Standard AMC -->
+                <div class="bg-gray-800 p-8 rounded-2xl border border-gray-700 hover:border-violet-600 card transition duration-300">
+                    <span class="inline-block px-3 py-1 text-xs font-semibold uppercase rounded-full bg-violet-600 text-white mb-4">Standard</span>
+                    <h3 class="text-3xl font-bold mb-4 text-white">Essential Care</h3>
+                    <p class="text-gray-400 mb-6 text-sm min-h-[4rem]">Basic operational stability, security, and responsive support during business hours.</p>
+                    <ul class="space-y-3 text-gray-300 text-sm">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-cyan-400 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>Bug Fixes & Security Patches</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-cyan-400 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>Monthly Health Checkup of Resources</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-cyan-400 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>Upto 5 Changes/Updates per Month</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-cyan-400 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>Email + WhatsApp Support (Business Hours)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Tier 2: Premium AMC (Highlighted) -->
+                <div class="bg-gray-800 p-8 rounded-2xl border-2 border-cyan-400 shadow-xl shadow-cyan-900/50 card transition duration-300">
+                    <span class="inline-block px-3 py-1 text-xs font-bold uppercase rounded-full bg-cyan-600 text-gray-900 mb-4">Premium (Most Popular)</span>
+                    <h3 class="text-3xl font-bold mb-4 text-white">Accelerated Performance</h3>
+                    <p class="text-gray-400 mb-6 text-sm min-h-[4rem]">Includes Standard features plus enhanced support, maintenance, and growth optimizations.</p>
+                    <ul class="space-y-3 text-gray-300 text-sm">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-violet-400 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>Everything in Standard</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-violet-400 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span><b>Priority Support</b> (within 24 hours)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-violet-400 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>Upto 15 Changes/Updates per Month</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-violet-400 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>Quarterly Performance Optimization + SEO Refresh</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-violet-400 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>Minor UI Refreshments / Feature Improvements</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Tier 3: Premium+ AMC -->
+                <div class="bg-gray-800 p-8 rounded-2xl border border-gray-700 hover:border-violet-600 card transition duration-300">
+                    <span class="inline-block px-3 py-1 text-xs font-semibold uppercase rounded-full bg-violet-600 text-white mb-4">Premium+</span>
+                    <h3 class="text-3xl font-bold mb-4 text-white">Full Partnership</h3>
+                    <p class="text-gray-400 mb-6 text-sm min-h-[4rem]">Maximum coverage, unlimited fixes, and guaranteed uptime with an SLA-backed commitment.</p>
+                    <ul class="space-y-3 text-gray-300 text-sm">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-cyan-400 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>Everything in Premium</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-cyan-400 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span><b>Unlimited</b> Bug Fixes</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-cyan-400 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span><b>All-Time Support</b> (24/7/365)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-cyan-400 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>Priority Security Monitoring</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-cyan-400 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>Emergency Downtime Recovery (<b>SLA Backed</b>)</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Design Add-on Services (Kept separate and centered for better flow) -->
+            <div class="lg:max-w-4xl mx-auto">
+                <div class="bg-gray-800 p-8 rounded-2xl border border-gray-700">
+                    <div class="text-5xl text-violet-400 mb-4">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                    </div>
+                    <h3 class="text-3xl font-bold mb-4 text-white">Creative Design Add-ons</h3>
+                    <p class="text-gray-400 mb-6">Enhance your digital project with professional graphic design, ensuring brand consistency across all mediums.</p>
+                    <ul class="space-y-3 text-gray-300">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-cyan-400 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>Custom Poster & Flyer Design</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-cyan-400 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>Branding, Logo & Identity Kits</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-cyan-400 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>Social Media Creative Assets</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-padding bg-gray-950">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl sm:text-5xl font-extrabold text-center mb-4 text-white">Start Your <span class="text-gradient">Project</span></h2>
+            <p class="text-lg text-gray-400 text-center mb-12">Tell us about your needs—whether it's a full software suite or a simple design task.</p>
+
+            <!-- FORM MODIFIED FOR FORMSPREE INTEGRATION -->
+            <form id="contact-form" 
+                  action="https://formspree.io/f/mzzjgqzb" 
+                  method="POST" 
+                  class="space-y-6 bg-gray-900 p-8 rounded-2xl shadow-2xl border border-gray-800">
+                
+                <!-- Hidden field for email subject (optional but helpful) -->
+                <input type="hidden" name="_subject" value="New Inquiry from Asta Epsilon Website">
+
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Full Name</label>
+                    <input type="text" id="name" name="name" required class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:ring-violet-500 focus:border-violet-500 transition duration-150" placeholder="John Doe">
+                </div>
+
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Work Email</label>
+                    <!-- IMPORTANT: Formspree requires the name attribute for the email field to be '_replyto' if you want replies to go to the user's email -->
+                    <input type="email" id="email" name="_replyto" required class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:ring-violet-500 focus:border-violet-500 transition duration-150" placeholder="john@company.com">
+                </div>
+
+                <div>
+                    <label for="service" class="block text-sm font-medium text-gray-300 mb-2">I am interested in...</label>
+                    <select id="service" name="service" required class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:ring-violet-500 focus:border-violet-500 transition duration-150">
+                        <option value="" disabled selected class="text-gray-500">Select a service</option>
+                        <option value="Full Project Suite">Full Project Suite (Website, App & Admin Software)</option>
+                        <option value="Web Development">Web Development Only</option>
+                        <option value="App Development">App Development Only</option>
+                        <option value="IoT Software & API Integration">IoT Software & API Integration</option>
+                        <option value="Standard AMC">Annual Maintenance Contract - Standard</option>
+                        <option value="Premium AMC">Annual Maintenance Contract - Premium</option>
+                        <option value="Premium+ AMC">Annual Maintenance Contract - Premium+</option>
+                        <option value="Design">Design (Poster/Flyer/Branding)</option>
+                        <option value="Other">Other Custom Software</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Project Details</label>
+                    <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:ring-violet-500 focus:border-violet-500 transition duration-150" placeholder="Describe your project, budget, and timeline..."></textarea>
+                </div>
+
+                <button type="submit" class="w-full flex justify-center items-center px-6 py-3 border border-transparent text-base font-medium rounded-xl shadow-lg text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-4 focus:ring-cyan-500 focus:ring-opacity-50 transition duration-300">
+                    Send Inquiry
+                </button>
+                <p id="form-message" class="text-center text-sm mt-4 hidden"></p>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-10 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Main Footer Content: Logo, Nav, Social -->
+            <!-- Using grid layout for better responsiveness on small screens -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left pb-8 border-b border-gray-800">
+                
+                <!-- Column 1: Logo and Branding -->
+                <div class="flex flex-col items-center md:items-start space-y-3">
+                    <!-- Logo (Smaller size for footer) -->
+                    <!-- 
+                        *** IMPORTANT: Logo Placeholder Warning *** Please replace the placeholder URL with the actual path to your 'Venture Design Studio by Asta Epsilon' logo.
+                    -->
+                    <img src="venture logo.png" 
+                         alt="Venture Design Studio Logo" 
+                         class="w-20 h-20 rounded-full"
+                         onerror="this.onerror=null;this.src='https://placehold.co/48x48/7c3aed/ffffff?text=AE';">
+                    <p class="text-2xl font-extrabold text-gradient">Venture Design Studio</p>
+                    <p class="text-sm text-gray-500">Engineered for Excellence.</p>
+                </div>
+
+                <!-- Column 2: Navigation Links -->
+                <div class="flex flex-col items-center md:items-start">
+                    <h4 class="text-lg font-semibold text-white mb-3">Quick Links</h4>
+                    <nav class="flex flex-col space-y-2 text-gray-400">
+                        <a href="#services" class="hover:text-cyan-400 text-sm transition duration-150">Services</a>
+                        <a href="#suite" class="hover:text-cyan-400 text-sm transition duration-150">Full Suites</a>
+                        <a href="#addons" class="hover:text-cyan-400 text-sm transition duration-150">Add-ons & AMC</a>
+                        <a href="#contact" class="hover:text-cyan-400 text-sm transition duration-150">Get a Quote</a>
+                    </nav>
+                </div>
+
+                <!-- Column 3: Social Media Links -->
+                <div class="flex flex-col items-center md:items-start">
+                    <h4 class="text-lg font-semibold text-white mb-3">Connect With Us</h4>
+                    <div class="flex space-x-6">
+                        
+                        <!-- Instagram Link -->
+                        <a href="#https://instagram.com/astaepsilon" target="_blank" aria-label="Asta Epsilon Instagram" class="text-gray-400 hover:text-pink-500 transition duration-150">
+                            <!-- Instagram Icon SVG -->
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                        </a>
+                        
+                        <!-- LinkedIn Link -->
+                        <a href="https://www.linkedin.com/company/asta-epsilon-group/" target="_blank" aria-label="Asta Epsilon LinkedIn" class="text-gray-400 hover:text-blue-400 transition duration-150">
+                            <!-- LinkedIn Icon SVG (Using fill for solid look) -->
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="0" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+                        </a>
+                        
+                        <!-- GitHub Link -->
+                        <a href="https://github.com/AstaEpsilonGroupOfficial" target="_blank" aria-label="Asta Epsilon GitHub" class="text-gray-400 hover:text-white transition duration-150">
+                            <!-- GitHub Icon SVG (Using fill for solid look) -->
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="0" stroke-linecap="round" stroke-linejoin="round">
+                                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.423 2.859 8.163 6.843 9.537.5.088.683-.233.683-.518 0-.256-.008-.942-.013-1.85-2.782.602-3.369-1.34-3.369-1.34-.454-1.154-1.107-1.464-1.107-1.464-.906-.619.068-.607.068-.607 1.002.071 1.53.992 1.53.992.89 1.524 2.336 1.083 2.903.827.091-.64.348-1.083.633-1.332-2.227-.251-4.568-1.115-4.568-4.949 0-1.09.39-1.984 1.029-2.682-.103-.254-.446-1.272.098-2.648 0 0 .84-.27 2.75 1.025A9.563 9.563 0 0 1 12 6.814c.85.008 1.701.114 2.502.327 1.908-1.295 2.748-1.025 2.748-1.025.542 1.376.199 2.394.098 2.648.64.698 1.028 1.592 1.028 2.682 0 3.843-2.342 4.694-4.577 4.943.359.309.678.92.678 1.855 0 1.334-.012 2.417-.012 2.747 0 .287.18.61.687.517C20.088 20.178 23 16.438 23 12.017 23 6.484 18.522 2 13 2h-1z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Copyright and Final Text -->
+            <div class="pt-8 text-center">
+                <p class="text-sm text-gray-500">&copy; 2025 Venture Design Studio by Asta Epsilon Group. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- Mobile Menu Toggle Functionality ---
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        document.getElementById('mobile-menu-btn').addEventListener('click', toggleMobileMenu);
+
+        // --- Form Submission Handler (UPDATED FOR FORMSPREE) ---
+        document.getElementById('contact-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const form = event.target;
+            const submitButton = form.querySelector('button[type="submit"]');
+            const messageElement = document.getElementById('form-message');
+
+            // Clear previous state
+            messageElement.classList.add('hidden');
+            messageElement.textContent = '';
+            
+            // Disable button and show loading state
+            submitButton.disabled = true;
+            submitButton.classList.add('flex', 'items-center', 'justify-center', 'space-x-2');
+            submitButton.innerHTML = '<span class="material-symbols-rounded animate-spin text-lg">sync</span> <span>Sending...</span>';
+
+            try {
+                // Submit form data using fetch
+                const formData = new FormData(form);
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    messageElement.textContent = 'Thank you! We have received your inquiry and will be in touch shortly.';
+                    messageElement.classList.remove('text-red-400');
+                    messageElement.classList.add('text-cyan-400');
+                    form.reset();
+                } else {
+                    // Handle Formspree server errors or validation issues
+                    const data = await response.json();
+                    let errorMessage = 'Form submission failed. Please ensure your Formspree key is correct.';
+                    if (data.errors) {
+                        errorMessage = 'Submission failed: ' + data.errors.map(e => e.message).join(', ');
+                    }
+                    messageElement.textContent = errorMessage;
+                    messageElement.classList.remove('text-cyan-400');
+                    messageElement.classList.add('text-red-400');
+                }
+            } catch (error) {
+                // Handle network errors
+                console.error('Submission error:', error);
+                messageElement.textContent = 'An unexpected error occurred. Please check your connection and try again.';
+                messageElement.classList.remove('text-cyan-400');
+                messageElement.classList.add('text-red-400');
+            } finally {
+                // Re-enable button and show final message
+                messageElement.classList.remove('hidden');
+                submitButton.disabled = false;
+                submitButton.innerHTML = 'Send Inquiry';
+                submitButton.classList.remove('flex', 'items-center', 'justify-center', 'space-x-2');
+            }
+        });
+
+            // In a real application, this is where you would call a Firebase Function
+            // or use the Firestore SDK to save the data.
+
+            // Simulate API call delay (2 seconds)
+            setTimeout(() => {
+                // Success Simulation
+                console.log('Form Data Submitted:', formData);
+                messageElement.textContent = 'Thank you! We have received your inquiry and will be in touch shortly.';
+                messageElement.classList.remove('hidden');
+                messageElement.classList.remove('text-red-400');
+                messageElement.classList.add('text-cyan-400');
+                form.reset();
+                submitButton.disabled = false;
+                submitButton.innerHTML = 'Send Inquiry';
+            }, 2000);
+
+            /*
+            // Example of using Firebase (Requires setup and imports outside this script)
+
+            // 1. Initialize Firebase (done globally in a real React/Angular project, or in script modules)
+            // 2. Get Firestore instance: const db = getFirestore(app);
+            // 3. Define collection path (e.g., /artifacts/{appId}/public/data/inquiries)
+            // 4. Use addDoc:
+
+            // try {
+            //     const inquiriesRef = collection(db, 'inquiries'); // Use the correct path based on your security rules
+            //     await addDoc(inquiriesRef, formData);
+            //     messageElement.textContent = 'Success! We received your message.';
+            //     messageElement.classList.add('text-cyan-400');
+            //     form.reset();
+            // } catch (error) {
+            //     console.error("Error submitting form: ", error);
+            //     messageElement.textContent = 'An error occurred. Please try again.';
+            //     messageElement.classList.add('text-red-400');
+            // } finally {
+            //     messageElement.classList.remove('hidden');
+            //     submitButton.disabled = false;
+            //     submitButton.innerHTML = 'Send Inquiry';
+            // }
+            */
+        
+
+        // --- Smooth Scrolling for all links ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                // Only perform smooth scroll if the target is on the same page
+                if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 80, // Adjust for fixed header height (20 units = 80px)
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
